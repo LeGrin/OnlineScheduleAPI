@@ -21,10 +21,18 @@ namespace OnlineSchedule
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
+                name: "ScheduleApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "GroupApi",
+                routeTemplate: "api/{controller}/",
+                defaults: new { id = RouteParameter.Optional }
+            );
+            //config Web API to return only json
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
         }
     }
 }

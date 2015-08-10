@@ -26,6 +26,8 @@ namespace OnlineSchedule.Models {
         public string Name { get; set; }
 
         public string FacultyId { get; set; }
+
+        public string groupKey { get; set; }
     }
 
     public class Classroom {
@@ -37,7 +39,10 @@ namespace OnlineSchedule.Models {
     }
 
     public class Faculty {
-        // primary key
+
         public string Name { get; set; }
+        
+        // primary key
+        public string FacultyId { get; set; }
     }
 }
