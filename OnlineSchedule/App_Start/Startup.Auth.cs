@@ -8,6 +8,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using OnlineSchedule.Providers;
+using DataProvider.Models;
 
 namespace OnlineSchedule
 {
