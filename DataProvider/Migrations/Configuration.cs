@@ -1,4 +1,4 @@
-namespace DataProvider.Migrations
+﻿namespace DataProvider.Migrations
 {
     using System;
     using System.Data.Entity;
@@ -26,6 +26,13 @@ namespace DataProvider.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            context.Faculties.AddOrUpdate(p => p.Id,
+                new Models.Faculty { Id = 0, Name = "Кібернетика" },
+                new Models.Faculty { Id = 2, Name = "МехМат" } );
+            context.Users.AddOrUpdate(p => p.Id,
+                new Microsoft.AspNet.Identity.EntityFramework.IdentityUser { Id="sysAdmin", UserName="sysAdmin" });
+            context.Groups.AddOrUpdate(
+                p => p.Id, new Models.Group {Name = "MSS3", FacultyId=0, });
         }
     }
 }
