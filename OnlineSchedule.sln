@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineSchedule", "OnlineSchedule\OnlineSchedule.csproj", "{6106163D-1DF4-48AF-93DC-DCEF14BBD341}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProvider", "DataProvider\DataProvider.csproj", "{5991DA8C-07C2-4F68-968E-8CE7EF7B2AA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleWebsite", "ScheduleWebsite\ScheduleWebsite.csproj", "{7F938308-3E88-4C71-AEEB-23C705479B12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5991DA8C-07C2-4F68-968E-8CE7EF7B2AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5991DA8C-07C2-4F68-968E-8CE7EF7B2AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5991DA8C-07C2-4F68-968E-8CE7EF7B2AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F938308-3E88-4C71-AEEB-23C705479B12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F938308-3E88-4C71-AEEB-23C705479B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F938308-3E88-4C71-AEEB-23C705479B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F938308-3E88-4C71-AEEB-23C705479B12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

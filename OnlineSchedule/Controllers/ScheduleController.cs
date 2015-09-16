@@ -8,7 +8,7 @@ using OnlineSchedule.Models;
 
 namespace OnlineSchedule.Controllers {
     public class ScheduleController : ApiController {
-        public IEnumerable<Subject> Get(string groupKey, DateTime? lastEditDate, DateTime start, DateTime end) {
+        public IEnumerable<SubjectModel> Get(string groupKey, DateTime? lastEditDate, DateTime start, DateTime end) {
 
             if (string.IsNullOrWhiteSpace(groupKey))
                 throw new InvalidOperationException("groupkey is not presented");
@@ -19,14 +19,14 @@ namespace OnlineSchedule.Controllers {
             // if lastEditDate == null -> return full information
 
             var rand = new Random();
-            var result = new List<Subject>();
+            var result = new List<SubjectModel>();
             for (int i = 1; i < 11; i++) {
-                result.Add(new Subject() {
+                result.Add(new SubjectModel() {
                     Id = i,
                     Date = start.AddDays(rand.NextDouble() * 3),
                     Name = "Subject" + i,
-                    RoomName = rand.Next(100).ToString(),
-                    LectureName = "Lecture" + i
+                    Classroom = rand.Next(100).ToString(),
+                    TeacherId = i
                 });
             }
 

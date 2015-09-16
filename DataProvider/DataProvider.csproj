@@ -45,8 +45,8 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -59,45 +59,62 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DbContext.cs" />
-    <Compile Include="Migrations\201508160723205_v1.cs" />
-    <Compile Include="Migrations\201508160723205_v1.Designer.cs">
-      <DependentUpon>201508160723205_v1.cs</DependentUpon>
+    <Compile Include="Migrations\201509131049462_v1.cs" />
+    <Compile Include="Migrations\201509131049462_v1.Designer.cs">
+      <DependentUpon>201509131049462_v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509131406079_v2.cs" />
+    <Compile Include="Migrations\201509131406079_v2.Designer.cs">
+      <DependentUpon>201509131406079_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509132017373_v3.cs" />
+    <Compile Include="Migrations\201509132017373_v3.Designer.cs">
+      <DependentUpon>201509132017373_v3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509142240055_v4.cs" />
+    <Compile Include="Migrations\201509142240055_v4.Designer.cs">
+      <DependentUpon>201509142240055_v4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509142247110_v5.cs" />
+    <Compile Include="Migrations\201509142247110_v5.Designer.cs">
+      <DependentUpon>201509142247110_v5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509160626598_v6.cs" />
+    <Compile Include="Migrations\201509160626598_v6.Designer.cs">
+      <DependentUpon>201509160626598_v6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Faculty.cs" />
     <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\ScheduleRow.cs" />
+    <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\ScheduleRule.cs" />
+    <Compile Include="Models\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Content\bootstrap-theme.css.map" />
-    <None Include="Content\bootstrap.css.map" />
-    <None Include="fonts\glyphicons-halflings-regular.eot" />
-    <None Include="fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="fonts\glyphicons-halflings-regular.woff" />
-    <None Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
-    <None Include="Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201508160723205_v1.resx">
-      <DependentUpon>201508160723205_v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201509131049462_v1.resx">
+      <DependentUpon>201509131049462_v1.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <EmbeddedResource Include="Migrations\201509131406079_v2.resx">
+      <DependentUpon>201509131406079_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509132017373_v3.resx">
+      <DependentUpon>201509132017373_v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509142240055_v4.resx">
+      <DependentUpon>201509142240055_v4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509142247110_v5.resx">
+      <DependentUpon>201509142247110_v5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509160626598_v6.resx">
+      <DependentUpon>201509160626598_v6.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

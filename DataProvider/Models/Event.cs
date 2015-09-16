@@ -9,8 +9,6 @@ namespace DataProvider.Models {
     public class Event {
         public int Id { get; set; }
 
-        public string Name { get; set; }
-
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
@@ -21,5 +19,10 @@ namespace DataProvider.Models {
         public int GroupId { get; set; }
 
         public virtual Group Group { get; set; }
+
+        [ForeignKey("Subject")]
+        public int SubjectId { get; set; }
+
+        public Subject Subject { get; set; }
     }
 }

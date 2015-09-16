@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,20 @@ namespace DataProvider.Context {
 
         public DbSet<Faculty> Faculties { get; set; }
 
-        public DbSet<ScheduleRow> ScheduleRows { get; set; } 
+        public DbSet<Teacher> Teachers { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+            modelBuilder
+                .Entity<Group>()
+                .Property(t => t.Key)
+                .IsRequired()
+                .HasMaxLength(60)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(
+                        new IndexAttribute("IX_GroupKey", 1) { IsUnique = true }));
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

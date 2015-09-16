@@ -18,6 +18,6 @@ namespace DataProvider.Models {
 
         public string Room { get; set; }
 
-        public string Lecturer { get; set; }
+        
     }
 }

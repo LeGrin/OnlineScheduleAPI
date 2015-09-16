@@ -12,6 +12,8 @@ namespace DataProvider.Models {
 
         public string Name { get; set; }
 
+        public string Key { get; set; }
+
         [ForeignKey("Faculty")]
         public int FacultyId { get; set; }
 
@@ -19,6 +21,9 @@ namespace DataProvider.Models {
 
         public ICollection<Event> Events { get; set; }
 
+        [ForeignKey("CreatorId")]
         public virtual IdentityUser Creator { get; set; }
+
+        public virtual string CreatorId { get; set; }
     }
 }

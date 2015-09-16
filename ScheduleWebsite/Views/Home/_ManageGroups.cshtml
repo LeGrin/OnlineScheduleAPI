@@ -1,0 +1,94 @@
+﻿<!-- ko with: manageGroups -->
+
+<div id="myModal" class="modal fade" data-bind="showModal:newGroup, with:newGroup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click: $parent.closeNewGroupDialog">&times;</button>
+                <h4 class="modal-title">New Group</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="groupName" class="control-label col-xs-4">Group Name</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="groupName" placeholder="Group Name" data-bind="value: name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="groupKey" class="control-label col-xs-4">Group Key</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="groupKey" placeholder="Group Key" data-bind="value: key">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="faculty" class="control-label col-xs-4">Faculty</label>
+                        <div class="col-xs-8">
+                            <select class="dropdown" data-bind="options: $parent.faculties, optionsText: 'name', value: faculty">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: $parent.closeNewGroupDialog">Close</button>
+                <button type="button" class="btn btn-primary" data-bind="click: $parent.saveNewGroup">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="col-md-12">
+        <p class="h2">Groups</p>
+    </div>
+    <div class="col-md-12">
+        <button type="button" class="btn btn-success" data-bind="click: createNewGroup">Create new group</button>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-hover tableEditRows">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Name</th>
+                    <th>Faculty</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: groups">
+                <tr data-bind="click: $parent.openGroup">
+                    <td data-bind="text: key"></td>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: faculty().name"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <div class="col-md-12">
+        <p class="h2">Teachers</p>
+    </div>
+    <div class="col-md-12">
+        <button type="button" class="btn btn-success" data-bind="click: createNewTeacher">Add teacher</button>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-hover tableEditRows">
+            <thead>
+                <tr>
+                    <th>Surname</th>
+                    <th>Name</th>
+                    <th>MIddle Name</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: teachers">
+                <tr>
+                    <td data-bind="text: surname"></td>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: middlename"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /ko -->
