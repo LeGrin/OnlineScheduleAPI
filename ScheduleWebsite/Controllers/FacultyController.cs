@@ -20,7 +20,7 @@ namespace ScheduleWebsite.Controllers
         }
         public async Task<IEnumerable<FacultyModel>> GetFaculties() {
             try {
-                var faculties = _context.Faculties.ToList().Select(x => FacultyModel.FromFaculty(x)).ToList(); ;
+                var faculties = _context.Faculties.ToList().Select(x => FacultyModel.FromFaculty(x)).ToList();
                 return faculties;
             }
             catch(Exception ex) {
