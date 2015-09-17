@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DataProvider.Context;
+using DataProvider.Models;
 using OnlineSchedule.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace ScheduleWebsite.Controllers
 {
@@ -21,14 +23,14 @@ namespace ScheduleWebsite.Controllers
 
         // GET api/teacher
         [ResponseType(typeof(IEnumerable<TeacherModel>))]
-        public async Task<IHttpActionResult> Get()
+        public async Task<IHttpActionResult> GetTeachers()
         {
             return Ok(_context.Teachers.AsQueryable().Select(TeacherModel.MapTeacherModel));
         }
 
         // GET api/teacher/5
         [ResponseType(typeof(TeacherModel))]
-        public async Task<IHttpActionResult> Get(int id)
+        public async Task<IHttpActionResult> GetTeachers(int id)
         {
             var teacher = await _context.Teachers.FindAsync(id);
 
@@ -39,18 +41,56 @@ namespace ScheduleWebsite.Controllers
         }
 
         // POST api/teacher
-        public void Post([FromBody]string value)
+        [Authorize]
+        public async Task<IHttpActionResult> PostTeacher(TeacherModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var newTeacher = new Teacher()
+            {
+                FirstName = model.name,
+                MiddleName = model.middlename,
+                LastName = model.surname,
+            };
+              _context.Teachers.Add(newTeacher);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                //                if (ex.IsCausedByUniqueConstraintViolation())
+                throw new ApplicationException("Group with such Key is already exists.");
+                //                else
+                //                   throw;
+            }
+
+            model.id = newTeacher.Id;
+            return CreatedAtRoute("DefaultApi", new { id = model.id }, model);
         }
 
         // PUT api/teacher/5
-        public void Put(int id, [FromBody]string value)
+        [Authorize]
+        [ResponseType(typeof(TeacherModel))]
+        public async Task<IHttpActionResult> PutTeacher(int id, TeacherModel model)
         {
+            if (id != model.id)
+                return BadRequest("No teacher with such id found");
+            var teacher = _context.Teachers.Where(x => x.Id == id).FirstOrDefault();
+            teacher.LastName = model.surname;
+            teacher.MiddleName = model.middlename;
+            teacher.FirstName = model.name;
+            _context.SaveChanges();
+            return CreatedAtRoute("DefaultApi", new { id = model.id }, model);
         }
 
         // DELETE api/teacher/5
         public void Delete(int id)
         {
+            var teacher = _context.Teachers.Where(x => x.Id == id).FirstOrDefault();
+            _context.Teachers.Remove(teacher);
+            _context.SaveChanges();
         }
     }
 }

@@ -33,7 +33,15 @@ namespace ScheduleWebsite.Controllers {
                 return BadRequest("Group not found");
 
             return Ok(GroupModel.FromGroup(dbEntry));
-        } 
+        }
+
+        [Authorize]
+        public void Delete(int id)
+        {
+            Group group = _context.Groups.Where(x => x.Id == id).FirstOrDefault();
+            _context.Groups.Remove(group);
+            _context.SaveChanges();
+        }
 
         [Authorize]
         public async Task<IHttpActionResult> PostGroup(GroupModel model) {
