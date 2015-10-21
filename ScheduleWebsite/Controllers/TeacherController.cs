@@ -50,7 +50,7 @@ namespace ScheduleWebsite.Controllers
             var newTeacher = new Teacher()
             {
                 FirstName = model.name,
-                MiddleName = model.middlename,
+                MiddleName = model.middleName,
                 LastName = model.surname,
             };
               _context.Teachers.Add(newTeacher);
@@ -79,18 +79,25 @@ namespace ScheduleWebsite.Controllers
                 return BadRequest("No teacher with such id found");
             var teacher = _context.Teachers.Where(x => x.Id == id).FirstOrDefault();
             teacher.LastName = model.surname;
-            teacher.MiddleName = model.middlename;
+            teacher.MiddleName = model.middleName;
             teacher.FirstName = model.name;
             _context.SaveChanges();
             return CreatedAtRoute("DefaultApi", new { id = model.id }, model);
         }
 
+        [Authorize]
+        [ResponseType(typeof(TeacherModel))]
         // DELETE api/teacher/5
-        public void Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            var teacher = _context.Teachers.Where(x => x.Id == id).FirstOrDefault();
-            _context.Teachers.Remove(teacher);
-            _context.SaveChanges();
+            Teacher teacher = await _context.Teachers.FindAsync(id);
+            if (teacher == null)
+                return NotFound();
+
+            teacher = _context.Teachers.Remove(teacher);
+            await _context.SaveChangesAsync();
+
+            return Ok(TeacherModel.FromTeacher(teacher));
         }
     }
 }

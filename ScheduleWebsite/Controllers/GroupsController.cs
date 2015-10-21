@@ -36,11 +36,17 @@ namespace ScheduleWebsite.Controllers {
         }
 
         [Authorize]
-        public void Delete(int id)
+        [ResponseType(typeof(GroupModel))]
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            Group group = _context.Groups.Where(x => x.Id == id).FirstOrDefault();
-            _context.Groups.Remove(group);
-            _context.SaveChanges();
+            Group group = await _context.Groups.FindAsync(id);
+            if (group == null)
+                return NotFound();
+
+            group = _context.Groups.Remove(group);
+            await _context.SaveChangesAsync();
+
+            return Ok(GroupModel.FromGroup(group));
         }
 
         [Authorize]
@@ -52,7 +58,8 @@ namespace ScheduleWebsite.Controllers {
                 Name = model.name,
                 Key = model.key,
                 FacultyId = model.facultyId,
-                CreatorId = User.Identity.GetUserId<string>()
+                CreatorId = User.Identity.GetUserId<string>(),
+                ParentGroupId = model.parentGroupId
             };
 
             _context.Groups.Add(newGroup);

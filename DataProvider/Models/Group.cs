@@ -25,5 +25,10 @@ namespace DataProvider.Models {
         public virtual IdentityUser Creator { get; set; }
 
         public virtual string CreatorId { get; set; }
+
+        [ForeignKey("ParentGroup")]
+        public int? ParentGroupId { get; set; }
+
+        public virtual Group ParentGroup { get; set; }
     }
 }

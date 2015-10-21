@@ -1,5 +1,6 @@
 ﻿function ManageGroupViewModel(app, datamodel) {
     var groupId = app.Views.ManageGroup.id;
+    debugger;
 
     function initialize() {
         datamodel.getGroups(groupId).success(function (data) {

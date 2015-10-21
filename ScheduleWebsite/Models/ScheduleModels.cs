@@ -45,12 +45,15 @@ namespace OnlineSchedule.Models {
         [Required]
         public string key { get; set; }
 
+        public int? parentGroupId { get; set; }
+
         public static GroupModel FromGroup(Group group){
             return new GroupModel(){
                 id = group.Id,
                 name = group.Name,
                 facultyId = group.FacultyId,
-                key = group.Key
+                key = group.Key,
+                parentGroupId = group.ParentGroupId ?? 0
             };
         }
     }
@@ -81,7 +84,7 @@ namespace OnlineSchedule.Models {
 
         public string name { get; set; }
 
-        public string middlename { get; set; }
+        public string middleName { get; set; }
 
         public string surname { get; set; }
 
@@ -89,12 +92,34 @@ namespace OnlineSchedule.Models {
             return new TeacherModel {
                 id = teacher.Id,
                 name = teacher.FirstName,
-                middlename = teacher.MiddleName,
+                middleName = teacher.MiddleName,
                 surname = teacher.LastName
             };
         }
 
         public static Func<Teacher, TeacherModel> MapTeacherModel = (x =>
             FromTeacher(x));
+    }
+
+    public class SubjectModel {
+        public int id { get; set; }
+
+        public string name { get; set; }
+
+        public int teacherId { get; set; }
+
+        public int type { get; set; }
+
+        public static SubjectModel FromSubject(Subject subject) {
+            return new SubjectModel() {
+                id = subject.Id,
+                name = subject.Name,
+                teacherId = subject.TeacherId,
+                type = (int)subject.Type
+            };
+        }
+
+        public static Func<Subject, SubjectModel> MapSubjectModel = (x =>
+            FromSubject(x));
     }
 }

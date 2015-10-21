@@ -181,16 +181,17 @@
 
     // Groups and Schedule management
     self.getGroups = function (id) {
+        debugger;
         return $.ajax(groupsUrl, {
             type: "GET",
             headers: getSecurityHeaders(),
-            data: id
+            data: { id: id }
         });
     };
 
     self.createGroup = function (data) {
         return $.ajax(groupsUrl, {
-            data: { name: data.name, key: data.key, facultyId: data.faculty.id },
+            data: { name: data.name, key: data.key, facultyId: data.faculty.id, parentGroupId: data.parentGroup && data.parentGroup.id },
             type: "POST",
             headers: getSecurityHeaders()
         });
@@ -205,9 +206,38 @@
 
     self.getTeachers = function (id) {
         return $.ajax({
+            url: teacherUrl,
             type: "GET",
             data: id,
             headers: getSecurityHeaders()
         });
     };
+
+    self.createTeacher = function (data) {
+        return $.ajax({
+            url: teacherUrl,
+            type: "POST",
+            data: data,
+            headers: getSecurityHeaders()
+        });
+    };
+
+    self.getSubjects = function (id) {
+        return $.ajax({
+            url: subjectUrl,
+            data: { id: id },
+            type: "GET"
+        });
+    }
+
+    self.saveSubject = function (data) {
+        try{
+            data.teacherId = data.teacher().id();
+
+            return $.ajax({
+                url: subjectUrl,
+                data: data
+            });
+        }
+    }
 }

@@ -1,4 +1,6 @@
-﻿<!-- ko with: manageGroups -->
+﻿<!-- ko with: manageGeneral -->
+
+<!-- ----------------------------- Groups ---------------------------- -->
 
 <div id="myModal" class="modal fade" data-bind="showModal:newGroup, with:newGroup">
     <div class="modal-dialog">
@@ -24,8 +26,13 @@
                     <div class="form-group">
                         <label for="faculty" class="control-label col-xs-4">Faculty</label>
                         <div class="col-xs-8">
-                            <select class="dropdown" data-bind="options: $parent.faculties, optionsText: 'name', value: faculty">
-                            </select>
+                            <select class="dropdown" data-bind="options: $parent.faculties, optionsText: 'name', value: faculty"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="parentGroup" class="control-label col-xs-4">Parent Group</label>
+                        <div class="col-xs-8">
+                            <select class="dropdown" data-bind="options: $parent.groups, optionsText: 'name', value: parentGroup, optionsCaption: 'select group'"></select>
                         </div>
                     </div>
                 </form>
@@ -65,6 +72,46 @@
     </div>
 </div>
 
+
+<!-- ------------------------- Teachers ---------------------------- -->
+
+<div id="myModal" class="modal fade" data-bind="showModal:newTeacher, with:newTeacher">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click: $parent.closeNewTeacherDialog">&times;</button>
+                <h4 class="modal-title">New Group</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="teacherName" class="control-label col-xs-4">Name</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="teacherName" placeholder="Name" data-bind="value: name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherMiddlename" class="control-label col-xs-4">Middlename</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="teacherMiddlename" placeholder="Middlename" data-bind="value: middleName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherSurname" class="control-label col-xs-4">Surname</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="teacherSurname" placeholder="Surname" data-bind="value: surname">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: $parent.closeNewTeacherDialog">Close</button>
+                <button type="button" class="btn btn-primary" data-bind="click: $parent.saveNewTeacher">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div>
     <div class="col-md-12">
         <p class="h2">Teachers</p>
@@ -91,4 +138,8 @@
         </table>
     </div>
 </div>
+
+<!------------------- Subjects ----------------->
+
+
 <!-- /ko -->

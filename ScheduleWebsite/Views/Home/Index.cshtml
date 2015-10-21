@@ -29,7 +29,7 @@
                 <div data-bind="if: loggedIn" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="#" data-bind="click: navigateToHome">Home</a></li>
-                        <li><a href="#" data-bind="click: navigateToManageGroups">Management</a></li>
+                        <li><a href="#" data-bind="click: navigateToManageGeneral">Management</a></li>
                         <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" data-bind="with: user">
@@ -50,7 +50,7 @@
         @Html.Partial("_Register")
         @Html.Partial("_RegisterExternal")
         @Html.Partial("_Manage")
-        @Html.Partial("_ManageGroups")
+        @Html.Partial("_ManageGeneral")
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

@@ -20,8 +20,8 @@ namespace DataProvider.Models {
     }
 
     public enum SubjectType {
-        lecture,
-        practik,
-        other
+        lecture = 0,
+        practik = 1,
+        other = 2
     }
 }
