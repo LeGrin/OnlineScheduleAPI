@@ -256,7 +256,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\app\customHandlers.js" />
     <Content Include="Scripts\app\manageGroup.viewmodel.js" />
-    <Content Include="Scripts\app\manageGroups.viewmodel.js" />
+    <Content Include="Scripts\app\manageGeneral.viewmodel.js" />
     <Content Include="Scripts\app\manageSubjects.viewmodel.js" />
     <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -333,7 +333,7 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Scripts\knockout.validation.min.js.map" />
     <Content Include="Scripts\underscore-min.map" />
-    <Content Include="Views\Home\_ManageGroups.cshtml" />
+    <Content Include="Views\Home\_ManageGeneral.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

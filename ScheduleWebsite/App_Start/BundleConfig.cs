@@ -31,7 +31,7 @@ namespace ScheduleWebsite {
                 "~/Scripts/app/register.viewmodel.js",
                 "~/Scripts/app/registerExternal.viewmodel.js",
                 "~/Scripts/app/manage.viewmodel.js",
-                "~/Scripts/app/manageGroups.viewmodel.js",
+                "~/Scripts/app/manageGeneral.viewmodel.js",
                 "~/Scripts/app/manageGroup.viewmodel.js",
                 "~/Scripts/app/userInfo.viewmodel.js",
                 "~/Scripts/app/_run.js"));
