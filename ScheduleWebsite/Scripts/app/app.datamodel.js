@@ -181,7 +181,6 @@
 
     // Groups and Schedule management
     self.getGroups = function (id) {
-        debugger;
         return $.ajax(groupsUrl, {
             type: "GET",
             headers: getSecurityHeaders(),
@@ -228,16 +227,17 @@
             data: { id: id },
             type: "GET"
         });
-    }
+    };
 
     self.saveSubject = function (data) {
-        try{
-            data.teacherId = data.teacher().id();
+        data.teacherId = data.teacher.id;
+        data.update = null;
 
-            return $.ajax({
-                url: subjectUrl,
-                data: data
-            });
-        }
-    }
+        return $.ajax({
+            type: data.id ? "PUT" : "POST",
+            url: subjectUrl,
+            data: data,
+            headers: getSecurityHeaders()
+        });
+    };
 }

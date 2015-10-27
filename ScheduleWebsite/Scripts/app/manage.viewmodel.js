@@ -1,5 +1,4 @@
 ﻿function ManageViewModel(app, dataModel) {
-    debugger;
     var self = this,
         startedLoad = false;
 

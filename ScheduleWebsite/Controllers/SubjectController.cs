@@ -36,9 +36,9 @@ namespace ScheduleWebsite.Controllers
             var subject = await _context.Subjects.FindAsync(id);
 
             if (subject == null)
-                return BadRequest("No teacher with such id found");
+                return BadRequest("No subject with such id found");
 
-            return Ok(TeacherModel.FromTeacher(subject));
+            return Ok(SubjectModel.FromSubject(subject));
         }
 
         // POST api/teacher
@@ -73,15 +73,15 @@ namespace ScheduleWebsite.Controllers
         }
 
         // PUT api/teacher/5
-        [System.Web.Http.Authorize]
         [ResponseType(typeof(SubjectModel))]
+        [System.Web.Http.Authorize]
         public async Task<IHttpActionResult> PutSubject(int id, SubjectModel model)
         {
             if (id != model.id)
                 return BadRequest("No subject with such id found");
             var subject = _context.Subjects.Where(x => x.Id == id).FirstOrDefault();
             subject.TeacherId = model.teacherId;
-            subject.Name = model.Name;
+            subject.Name = model.name;
             subject.Type = (SubjectType)model.type;
             _context.SaveChanges();
             return CreatedAtRoute("DefaultApi", new { id = model.id }, model);

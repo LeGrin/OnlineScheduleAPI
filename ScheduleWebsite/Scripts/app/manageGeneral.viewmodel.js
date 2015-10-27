@@ -41,10 +41,18 @@
         dataModel.getTeachers().success(function (teachers) {
             self.teachers.valueWillMutate();
             _.each(teachers, function (teacher) {
-                self.teachers.push(new Teacher(teacher.id, teacher.name, teacher.middleName, teacher.surname));
+                self.teachers.push(new TeacherModel(teacher.id, teacher.name, teacher.middleName, teacher.surname));
             });
             self.teachers.valueHasMutated();
-        });
+        })
+            .done(function () {
+                dataModel.getSubjects().success(function (subjects) {
+                    _.each(subjects, function (subject) {
+                        var teacher = findById(subject.teacherId, self.teachers(), "id", true);
+                        self.subjects.push(new SubjectModel(subject.id, subject.name, subject.type, teacher));
+                    });
+                })
+            });
     }
 
     self.groups = ko.observableArray([]);
@@ -54,7 +62,7 @@
 
     self.newGroup = ko.observable();
     self.newTeacher = ko.observable();
-    self.newSubject = ko.observable();
+    self.editSubject = ko.observable();
 
 
     self.createNewGroup = function () {
@@ -65,10 +73,9 @@
         self.newTeacher(new TeacherModel(0, '', '', ''));
     }
 
-    self.createNewSubjects = function () {
-        self.newSubject(new SubjectModel(0, '', 0, null));
+    self.createNewSubject = function () {
+        self.editSubject(new SubjectModel(0, '', 0, null));
     }
-
 
     self.closeNewGroupDialog = function () {
         self.newGroup({});
@@ -76,6 +83,10 @@
 
     self.closeNewTeacherDialog = function () {
         self.newTeacher({});
+    };
+
+    self.closeSubjectEditDialog = function () {
+        self.editSubject({});
     };
 
 
@@ -101,7 +112,7 @@
     };
 
     self.saveSubject = function () {
-        dataModel.saveSubject(ko.mapping.toJS(self.newSubject()))
+        var a = dataModel.saveSubject(ko.mapping.toJS(self.editSubject()))
             .success(function (savedSubject) {
                 var existSubject = findById(savedSubject.id, self.subjects(), "id", true);
                 var teacher = findById(savedSubject.teacherId, self.teachers(), "id", true);
@@ -126,7 +137,7 @@
 
 
     initialize();
-}
+};
 
 function GroupModel(id, key, name, faculty) {
     this.id = ko.observable(id);
@@ -134,29 +145,34 @@ function GroupModel(id, key, name, faculty) {
     this.key = ko.observable(key);
     this.faculty = ko.observable(faculty);
     this.parentGroup = ko.observable();
-}
+};
 
 GroupModel.prototype.setParentGroup = function (parentGroup) {
     this.parentGroup(parentGroup);
-}
+};
 
 
 function FacultyModel(id, name) {
     this.id = id;
     this.name = name;
-}
+};
 
 
 function TeacherModel(id, name, middleName, surname) {
+    self = this;
+
     this.id = ko.observable(id);
     this.name = ko.observable(name);
-    this.middleName = ko.observable(middleName);
+    this.middlename = ko.observable(middleName);
     this.surname = ko.observable(surname);
-}
 
+    this.presentName = ko.computed(function () {
+        return self.surname() + " " + self.name() + " " + self.middlename();
+    });
+};
 
 function SubjectModel(id, name, type, teacher) {
-    if (_.isEmpty(teacher))
+    if (id && _.isEmpty(teacher))
         throw new Error("Teacher is not defined");
 
     var self = this;
@@ -165,10 +181,10 @@ function SubjectModel(id, name, type, teacher) {
     this.type = ko.observable(type);
     this.teacher = ko.observable(teacher);
 
-    this.presentType = ko.computed(function(){
-        return self.subjectTypes[~~ self.type()];
+    this.presentType = ko.computed(function () {
+        return self.subjectTypes[~~self.type()];
     });
-}
+};
 
 SubjectModel.prototype.subjectTypes = ["Lecture", "Seminar"];
 
@@ -176,17 +192,20 @@ SubjectModel.prototype.update = function (subject, newTeacher) {
     this.name(subject.name);
     this.type(subject.type);
     this.teacher(newTeacher);
-}
+};
 
 
-app.addViewModel({
-    name: "ManageGeneral",
-    bindingMemberName: "manageGeneral",
-    factory: ManageGeneralViewModel,
-    navigatorFactory: function (app) {
-        return function () {
-            app.errors.removeAll();
-            app.view(app.Views.ManageGeneral);
+(function () {
+
+    app.addViewModel({
+        name: "ManageGeneral",
+        bindingMemberName: "manageGeneral",
+        factory: ManageGeneralViewModel,
+        navigatorFactory: function (app) {
+            return function () {
+                app.errors.removeAll();
+                app.view(app.Views.ManageGeneral);
+            }
         }
-    }
-});
+    });
+})();

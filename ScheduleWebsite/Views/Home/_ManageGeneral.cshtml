@@ -39,7 +39,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: $parent.closeNewGroupDialog">Close</button>
-                <button type="button" class="btn btn-primary" data-bind="click: $parent.saveNewGroup">Save changes</button>
+                <button type="button" class="btn btn-primary" data-bind="click: $parent.saveNewGroup">Save</button>
             </div>
         </div>
     </div>
@@ -56,6 +56,7 @@
         <table class="table table-hover tableEditRows">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Key</th>
                     <th>Name</th>
                     <th>Faculty</th>
@@ -63,6 +64,9 @@
             </thead>
             <tbody data-bind="foreach: groups">
                 <tr data-bind="click: $parent.openGroup">
+                    <td>
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </td>
                     <td data-bind="text: key"></td>
                     <td data-bind="text: name"></td>
                     <td data-bind="text: faculty().name"></td>
@@ -93,7 +97,7 @@
                     <div class="form-group">
                         <label for="teacherMiddlename" class="control-label col-xs-4">Middlename</label>
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" id="teacherMiddlename" placeholder="Middlename" data-bind="value: middleName">
+                            <input type="text" class="form-control" id="teacherMiddlename" placeholder="Middlename" data-bind="value: middlename">
                         </div>
                     </div>
                     <div class="form-group">
@@ -106,7 +110,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: $parent.closeNewTeacherDialog">Close</button>
-                <button type="button" class="btn btn-primary" data-bind="click: $parent.saveNewTeacher">Save changes</button>
+                <button type="button" class="btn btn-primary" data-bind="click: $parent.saveNewTeacher">Save</button>
             </div>
         </div>
     </div>
@@ -123,13 +127,17 @@
         <table class="table table-hover tableEditRows">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Surname</th>
                     <th>Name</th>
-                    <th>MIddle Name</th>
+                    <th>Middle Name</th>
                 </tr>
             </thead>
             <tbody data-bind="foreach: teachers">
                 <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </td>
                     <td data-bind="text: surname"></td>
                     <td data-bind="text: name"></td>
                     <td data-bind="text: middlename"></td>
@@ -140,6 +148,79 @@
 </div>
 
 <!------------------- Subjects ----------------->
+
+<div id="myModal" class="modal fade" data-bind="showModal:editSubject, with:editSubject">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click: $parent.closeSubjectEditDialog">&times;</button>
+                <h4 class="modal-title">New Group</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="teacherName" class="control-label col-xs-4">Name</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="subjectName" placeholder="Name" data-bind="value: name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subjectType" class="control-label col-xs-4">Type</label>
+                        <div class="col-xs-8">
+                            <!-- has strong connection with SubjectType -->
+                            <select data-bind="value: type" id="subjectType">
+                                <option value="0">Lecture</option>
+                                <option value="1">Practice</option>
+                                <option value="2">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subjectTeacher" class="control-label col-xs-4">Teacher</label>
+                        <div class="col-xs-8">
+                            <select class="dropdown" data-bind="options: $parent.teachers, optionsText: 'presentName', value: teacher"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: $parent.closeSubjectEditDialog">Close</button>
+                <button type="button" class="btn btn-primary" data-bind="click: $parent.saveSubject">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="col-md-12">
+        <p class="h2">Subjects</p>
+    </div>
+    <div class="col-md-12">
+        <button type="button" class="btn btn-success" data-bind="click: createNewSubject">Add subject</button>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-hover tableEditRows">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>teacher</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: subjects">
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </td>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: presentType"></td>
+                    <td data-bind="text: teacher().presentName"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
 <!-- /ko -->
